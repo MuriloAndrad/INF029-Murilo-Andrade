@@ -256,29 +256,40 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
     int i = 0;
     int j;
     int idxPos = 0;
-    int lenBusca = 0;
+    int lenBuscaBytes = 0;
+    int lenBuscaChars = 0;
 
-    while (strBusca[lenBusca] != '\0') {
-        lenBusca++;
+    while (strBusca[lenBuscaBytes] != '\0') {
+        if (((unsigned char)strBusca[lenBuscaBytes] & 0xC0) != 0x80) {
+            lenBuscaChars++;
+        }
+        lenBuscaBytes++;
     }
 
-    if (lenBusca == 0) return 0;
+    if (lenBuscaBytes == 0) return 0;
+
+    int charIndex = 1;
 
     while (strTexto[i] != '\0') {
         int match = 1;
-        for (j = 0; j < lenBusca; j++) {
+        for (j = 0; j < lenBuscaBytes; j++) {
             if (strTexto[i + j] == '\0' || strTexto[i + j] != strBusca[j]) {
                 match = 0;
                 break;
             }
         }
+        
         if (match == 1) {
             qtdOcorrencias++;
-            posicoes[idxPos] = i + 1;
-            posicoes[idxPos + 1] = i + lenBusca;
+            posicoes[idxPos] = charIndex;
+            posicoes[idxPos + 1] = charIndex + lenBuscaChars - 1;
             idxPos += 2;
         }
+        
         i++;
+        if (strTexto[i] != '\0' && ((unsigned char)strTexto[i] & 0xC0) != 0x80) {
+            charIndex++;
+        }
     }
 
     return qtdOcorrencias;
