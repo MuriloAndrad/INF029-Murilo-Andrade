@@ -135,24 +135,68 @@ int q1(char data[])
 DiasMesesAnos q2(char datainicial[], char datafinal[])
 {
 
-    //calcule os dados e armazene nas três variáveis a seguir
     DiasMesesAnos dma;
 
-    if (q1(datainicial) == 0){
-      dma.retorno = 2;
-      return dma;
-    }else if (q1(datafinal) == 0){
-      dma.retorno = 3;
-      return dma;
-    }else{
-      //verifique se a data final não é menor que a data inicial
-      
-      //calcule a distancia entre as datas
+    if (q1(datainicial) == 0) {
+        dma.retorno = 2;
+        return dma;
+    }
+    if (q1(datafinal) == 0) {
+        dma.retorno = 3;
+        return dma;
+    }
 
+    DataQuebrada dqI = quebraData(datainicial);
+    DataQuebrada dqF = quebraData(datafinal);
 
-      //se tudo der certo
-      dma.retorno = 1;
-      return dma;
+    if (dqI.iAno > dqF.iAno || 
+       (dqI.iAno == dqF.iAno && dqI.iMes > dqF.iMes) || 
+       (dqI.iAno == dqF.iAno && dqI.iMes == dqF.iMes && dqI.iDia > dqF.iDia)) {
+        dma.retorno = 4;
+        return dma;
+    }
+
+    int dias = dqF.iDia - dqI.iDia;
+    int meses = dqF.iMes - dqI.iMes;
+    int anos = dqF.iAno - dqI.iAno;
+
+    if (dias < 0) {
+        meses--;
+        int mesAnt = dqF.iMes - 1;
+        int anoAnt = dqF.iAno;
+        
+        if (mesAnt == 0) {
+            mesAnt = 12;
+            anoAnt--;
+        }
+        
+        int bissexto = 0;
+        if (anoAnt % 4 == 0 && (anoAnt % 100 != 0 || anoAnt % 400 == 0)) {
+            bissexto = 1;
+        }
+        
+        int diasMes = 31;
+        if (mesAnt == 4 || mesAnt == 6 || mesAnt == 9 || mesAnt == 11) {
+            diasMes = 30;
+        } else if (mesAnt == 2) {
+            if (bissexto == 1) diasMes = 29;
+            else diasMes = 28;
+        }
+        
+        dias += diasMes;
+    }
+
+    if (meses < 0) {
+        anos--;
+        meses += 12;
+    }
+
+    dma.qtdDias = dias;
+    dma.qtdMeses = meses;
+    dma.qtdAnos = anos;
+    dma.retorno = 1;
+
+    return dma;
       
     }
     
