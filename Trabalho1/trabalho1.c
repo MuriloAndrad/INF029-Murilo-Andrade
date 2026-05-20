@@ -381,8 +381,44 @@ int q6(int numerobase, int numerobusca)
 
  int q7(char matriz[8][10], char palavra[5])
  {
-     int achou;
-     return achou;
+     int achou = 0;
+    int i, j, d, k;
+    int dx[8] = {0, 0, 1, -1, 1, 1, -1, -1};
+    int dy[8] = {1, -1, 0, 0, 1, -1, 1, -1};
+    
+    int len = 0;
+    while (palavra[len] != '\0') {
+        len++;
+    }
+    
+    if (len == 0) return 0;
+    
+    for (i = 0; i < 8; i++) {
+        for (j = 0; j < 10; j++) {
+            for (d = 0; d < 8; d++) {
+                int match = 1;
+                for (k = 0; k < len; k++) {
+                    int nx = i + k * dx[d];
+                    int ny = j + k * dy[d];
+                    
+                    if (nx < 0 || nx >= 8 || ny < 0 || ny >= 10) {
+                        match = 0;
+                        break;
+                    }
+                    
+                    if (matriz[nx][ny] != palavra[k]) {
+                        match = 0;
+                        break;
+                    }
+                }
+                if (match == 1) {
+                    return 1;
+                }
+            }
+        }
+    }
+    
+    return achou;
  }
 
 
