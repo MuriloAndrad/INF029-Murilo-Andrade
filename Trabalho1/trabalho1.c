@@ -198,7 +198,6 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
 
     return dma;
       
-    }
     
 }
 
