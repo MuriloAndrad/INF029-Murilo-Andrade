@@ -91,17 +91,29 @@ int teste(int a)
  */
 int q1(char data[])
 {
-  int datavalida = 1;
-
-  //quebrar a string data em strings sDia, sMes, sAno
-
-
-  //printf("%s\n", data);
-
-  if (datavalida)
-      return 1;
-  else
-      return 0;
+  DataQuebrada dq = quebraData(data);
+    if (dq.valido == 0) return 0;
+    
+    int bissexto = 0;
+    int diasMes = 31;
+    
+    if (dq.iAno < 0) return 0;
+    if (dq.iMes < 1 || dq.iMes > 12) return 0;
+    
+    if (dq.iAno % 4 == 0 && (dq.iAno % 100 != 0 || dq.iAno % 400 == 0)) {
+        bissexto = 1;
+    }
+    
+    if (dq.iMes == 4 || dq.iMes == 6 || dq.iMes == 9 || dq.iMes == 11) {
+        diasMes = 30;
+    } else if (dq.iMes == 2) {
+        if (bissexto == 1) diasMes = 29;
+        else diasMes = 28;
+    }
+    
+    if (dq.iDia < 1 || dq.iDia > diasMes) return 0;
+    
+    return 1;
 }
 
 
