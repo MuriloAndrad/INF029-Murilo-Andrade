@@ -340,7 +340,32 @@ int q5(int num)
 
 int q6(int numerobase, int numerobusca)
 {
-    int qtdOcorrencias;
+    int qtdOcorrencias = 0;
+    
+    if (numerobase < 0) numerobase = -numerobase;
+    if (numerobusca < 0) numerobusca = -numerobusca;
+    
+    if (numerobase == 0 && numerobusca == 0) return 1;
+    
+    int mag = 1;
+    int tempBusca = numerobusca;
+    
+    if (tempBusca == 0) {
+        mag = 10;
+    } else {
+        while (tempBusca > 0) {
+            mag *= 10;
+            tempBusca /= 10;
+        }
+    }
+    
+    while (numerobase > 0) {
+        if (numerobase % mag == numerobusca) {
+            qtdOcorrencias++;
+        }
+        numerobase /= 10;
+    }
+    
     return qtdOcorrencias;
 }
 
