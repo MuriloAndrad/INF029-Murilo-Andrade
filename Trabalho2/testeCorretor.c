@@ -23,14 +23,14 @@ int main()
     //testarArquivoPrimeiraVez();
     //testarArquivoSegundaVez();
     //testeInserirSemNada();
-    //testeCriarEstrutura();
+    testeCriarEstrutura();
     testeInserirComEstrutura();
-    /*testeExcluir();
+    testeExcluir();
     testeExcluirNumeroEspecifico();
     testeListar();
     testeRetornarTodosNumeros();
     testeMudarTamanhoEstrutura();
-    testeListaEncadeada();*/
+    testeListaEncadeada();
     finalizar();
 }
 int ligado = 1;
