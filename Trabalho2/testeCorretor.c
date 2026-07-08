@@ -33,7 +33,7 @@ int main()
     testeListaEncadeada();
     finalizar();
 }
-int ligado = 1;
+int ligado = 0;
 void show_log(char *str)
 {
     if (ligado)
