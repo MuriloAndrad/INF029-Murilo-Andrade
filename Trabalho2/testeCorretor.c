@@ -21,11 +21,11 @@ int main()
 {
     inicializar();
     //testarArquivoPrimeiraVez();
-    testarArquivoSegundaVez();
-    testeInserirSemNada();
-    /*testeCriarEstrutura();
+    //testarArquivoSegundaVez();
+    //testeInserirSemNada();
+    //testeCriarEstrutura();
     testeInserirComEstrutura();
-    testeExcluir();
+    /*testeExcluir();
     testeExcluirNumeroEspecifico();
     testeListar();
     testeRetornarTodosNumeros();
@@ -33,7 +33,7 @@ int main()
     testeListaEncadeada();*/
     finalizar();
 }
-int ligado = 0;
+int ligado = 1;
 void show_log(char *str)
 {
     if (ligado)
