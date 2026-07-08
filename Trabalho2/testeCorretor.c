@@ -22,7 +22,7 @@ int main()
     inicializar();
     //testarArquivoPrimeiraVez();
     //testarArquivoSegundaVez();
-    //testeInserirSemNada();
+    testeInserirSemNada();
     testeCriarEstrutura();
     testeInserirComEstrutura();
     testeExcluir();
